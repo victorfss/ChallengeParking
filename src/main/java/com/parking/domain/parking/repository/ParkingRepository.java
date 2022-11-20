@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 public interface ParkingRepository extends JpaRepository<Parking, Long> {
-    Optional<Parking> findByVehicleId(final Long idVehicle);
+    Optional<Parking> findByVehiclePlateAndPaidIsFalse(final String plate);
     Optional<Parking> findByVehicleIdAndPaidIsTrueAndExitDateIsNull(final Long idVehicle);
 
     Optional<Parking> findByVehicleIdAndExitDateIsNull(final Long idVehicle);

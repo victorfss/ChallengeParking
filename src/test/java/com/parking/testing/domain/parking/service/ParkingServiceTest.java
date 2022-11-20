@@ -153,23 +153,8 @@ class ParkingServiceTest {
     }
 
     @Test
-    void whenPayPlateNotExist_throwApiExceptionVehicleNotFound() {
-        when(vehicleService.findByPlate(vehicleDto.getPlate())).thenReturn(Optional.empty());
-        String plate = vehicleDto.getPlate();
-        try {
-            parkingServiceImpl.pay(plate);
-            fail();
-        } catch (ApiException e) {
-            assertEquals(Error.VEHICLE_NOT_FOUND, e.getError());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
     void whenPayVehicleIsNotInParkingLot_throwApiExceptionUnpaidParking() {
-        when(vehicleService.findByPlate(vehicleDto.getPlate())).thenReturn(Optional.of(expectedVehicle));
-        when(parkingRepository.findByVehicleId(expectedVehicle.getId())).thenReturn(Optional.empty());
+        when(parkingRepository.findByVehiclePlateAndPaidIsFalse(expectedVehicle.getPlate())).thenReturn(Optional.empty());
         String plate = vehicleDto.getPlate();
         try {
             parkingServiceImpl.pay(plate);

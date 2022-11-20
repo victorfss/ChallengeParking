@@ -44,8 +44,8 @@ class ParkingRepositoryTest {
     }
 
     @Test
-    void findParkingByVehicleId_thenReturnParking() {
-        Optional<Parking> maybeParking = parkingRepository.findByVehicleId(parking.getVehicle().getId());
+    void findParkingByVehiclePlate_thenReturnParking() {
+        Optional<Parking> maybeParking = parkingRepository.findByVehiclePlateAndPaidIsFalse(parking.getVehicle().getPlate());
         assertTrue(maybeParking.isPresent());
         assertNotNull(maybeParking.get().getId());
         assertNotNull(maybeParking.get().getReservationCode());
@@ -53,8 +53,8 @@ class ParkingRepositoryTest {
     }
 
     @Test
-    void notFoundId_thenReturnOptionalEmpty() {
-        Optional<Parking> maybeParking = parkingRepository.findByVehicleId(2L);
+    void notFoundPlate_thenReturnOptionalEmpty() {
+        Optional<Parking> maybeParking = parkingRepository.findByVehiclePlateAndPaidIsFalse("ABC-4545");
         assertTrue(maybeParking.isEmpty());
     }
 

@@ -52,8 +52,7 @@ public class ParkingServiceImpl implements ParkingService {
     @Transactional
     @Override
     public Parking pay(final String plate) {
-        Vehicle vehicle = this.vehicleService.findByPlate(plate).orElseThrow(() -> new ApiException(Error.VEHICLE_NOT_FOUND));
-        Parking parking = this.parkingRepository.findByVehicleId(vehicle.getId()).orElseThrow(() -> new ApiException(Error.VEHICLE_IN_PARKING_NOT_FOUND));
+        Parking parking = this.parkingRepository.findByVehiclePlateAndPaidIsFalse(plate).orElseThrow(() -> new ApiException(Error.VEHICLE_IN_PARKING_NOT_FOUND));
         parking.setPaid(true);
         return this.parkingRepository.save(parking);
     }
