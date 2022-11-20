@@ -78,24 +78,6 @@ class ParkingControllerIntegrationTest {
                 .andExpect(status().isUnprocessableEntity());
     }
 
-    /*@Test
-    void whenPostVehicleWithBlankPlate_thenUnprocessableEntity() throws Exception {
-        VehicleDTO vehicle = new VehicleDTO("");
-        mvc.perform(post("/v1/parking")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(vehicle)))
-                .andExpect(status().isUnprocessableEntity());
-    }
-
-    @Test
-    void whenPostVehicleWithNullPlate_thenUnprocessableEntity() throws Exception {
-        VehicleDTO vehicle = new VehicleDTO(null);
-        mvc.perform(post("/v1/parking")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(vehicle)))
-                .andExpect(status().isUnprocessableEntity());
-    }*/
-
     @MethodSource("invalidParkinkSamePlate")
     @ParameterizedTest
     void whenDuplicatedCarParking_thenThrowConflict(VehicleDTO vehicleDTO) throws Exception {
