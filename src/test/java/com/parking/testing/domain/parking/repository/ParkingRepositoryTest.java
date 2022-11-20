@@ -44,7 +44,7 @@ class ParkingRepositoryTest {
     }
 
     @Test
-    void findParkingByVehiclePlate_thenReturnParking() {
+    void whenFindParkingByVehiclePlate_thenReturnParking() {
         Optional<Parking> maybeParking = parkingRepository.findByVehiclePlateAndPaidIsFalse(parking.getVehicle().getPlate());
         assertTrue(maybeParking.isPresent());
         assertNotNull(maybeParking.get().getId());
